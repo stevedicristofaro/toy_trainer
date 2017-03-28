@@ -1,7 +1,13 @@
 # toy_trainer
 A toy Python package to train sklearn and Tensorflow models.
 
-## How to Run
+#### Dependencies
+- numpy==1.12.1
+- scikit-learn==0.18.1
+- scipy==0.19.0
+- tensorflow-gpu==1.0.1 (cpu-only should work fine as well)
+
+#### How to Run
 ```python
 # Most basic (will use all defaults)
 python runner.py
