@@ -1,0 +1,12 @@
+{
+  "batch_size": 100,
+  "n_iter": 1000,
+  "optimizer": {"type": "rmsprop", "learning_rate": 0.001, "decay": 0.9},
+  "layers": [
+      {"type": "dropout", "activation": "tanh", "n_weights": 60},
+      {"type": "dropout", "activation": "tanh", "n_weights": 60},
+      {"type": "dropout", "activation": "tanh", "n_weights": 24},
+      {"type": "dropout"}
+  ],
+  "dropout": {"train_p_input": 0.8, "train_p_hidden": 0.5, "test_p_input": 1.0, "test_p_hidden": 1.0}
+}
