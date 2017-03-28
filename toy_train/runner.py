@@ -24,7 +24,6 @@ if __name__ == "__main__":
     parser.add_argument('-tp', dest='train_percent', help='Percentage of data to allocate to training.', type=float, default=DEFAULT_TRAIN_SIZE)
     parser.add_argument('--reg', dest='regressor', help='Perform regression.', default=False, action='store_true')
     parser.add_argument('--seed', dest='seed', help='Seed random number generators.', type=int, default=DEFAULT_SEED)
-    parser.add_argument('--dry', dest='dry_run', help='Dry run without saving models.', default=False, action='store_true')
     args = parser.parse_args()
 
     # 1) Load a dataset
@@ -42,4 +41,4 @@ if __name__ == "__main__":
 
     run_toy_trainer(data, args.model_key, train_size=args.train_percent,
                     random_seed=args.seed, regressor=args.regressor,
-                    nn_config=nn_config, dry_run=args.dry_run)
+                    nn_config=nn_config)

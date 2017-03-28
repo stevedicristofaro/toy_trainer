@@ -191,7 +191,7 @@ def train_sklearn_model(train_features, test_features, train_labels, test_labels
 # Main Interface #
 ##################
 
-def run_toy_trainer(dataset, model_key, train_size, random_seed, regressor, nn_config, dry_run):
+def run_toy_trainer(dataset, model_key, train_size, random_seed, regressor, nn_config):
     '''
     Main interface for model training.
     :param dataset: Dataset object
@@ -215,11 +215,11 @@ def run_toy_trainer(dataset, model_key, train_size, random_seed, regressor, nn_c
         else:
             raise ConfigurationError('[!] Unable to train regressive Tensorflow model at the moment.')
 
-        train_tensorflow_network(nn_config, X_train, X_test, y_train, y_test, regressor=regressor, model_save=dry_run)
+        train_tensorflow_network(nn_config, X_train, X_test, y_train, y_test, regressor=regressor)
 
     else:
         # Training branch for sklearn models
-        train_sklearn_model(X_train, X_test, y_train, y_test, model_key, regressor=regressor, model_save=dry_run)
+        train_sklearn_model(X_train, X_test, y_train, y_test, model_key, regressor=regressor)
 
 
 ##################
