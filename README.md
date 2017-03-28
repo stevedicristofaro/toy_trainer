@@ -31,11 +31,12 @@ python runner.py -data BOS -m SVM -tp 0.6 --reg
     - KNN (K-Nearest Neighbors)
     - SVM (Support Vector Machine)
     - RF (Random Forest)
-    - NEURAL (Tensorflow Neural Network)
-   NOTE:
-   Optionally enable regression [`--`reg] with any model key except NEURAL (only classification is supported currently)
+    - NEURAL (Tensorflow Neural Network)   
  - Training Percent [-tp] A float between 0.0 and 1.0 to designate the proportion of data to use for training.
  - Random seed [`--`seed] An integer seed for the random number generator.
+
+ NOTE:  
+ Optionally enable regression [`--`reg] with any model key except NEURAL (only classification is supported currently)
 
 #### Tensorflow Configuration
 The configuration of deep learning networks resides in nn_config.json. The configuration file supports very basic layers involving dropout regularizers and relevant supported Tensorflow activation functions. This configuration requires a priori knowledge of your dataset to properly configure the weights for each layer using the n_weights parameter. The following configurable keys are supported:
@@ -46,6 +47,7 @@ The configuration of deep learning networks resides in nn_config.json. The confi
     - Any keyword arguments pertaining to the optimizer object can be specified
   - Layer Type
     - dropout [tf.nn.dropout](https://www.tensorflow.org/api_docs/python/tf/nn/dropout)
+    
     NOTE: There is also a configurable dropout mapping for the probabilities of the input and hidden layer dropouts that accepts floating-point probabilities
   - Layer activation [Activation Functions](https://www.tensorflow.org/api_guides/python/nn#Activation_Functions)
     - sigmoid, tanh, (Untested: elu, softplus, and softsign)
