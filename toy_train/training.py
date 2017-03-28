@@ -75,7 +75,7 @@ def assemble_weight_list(layers, m, k):
                     weights.append(init_weights([prev_layer_w, layer['n_weights']]))
     return weights
 
-def train_tensorflow_network(config, train_features, test_features, train_labels, test_labels, regressor=False):
+def train_tensorflow_network(config, train_features, test_features, train_labels, test_labels):
     '''
     Train a tensorflow network on a dataset.
     :param config: Serialized network config
@@ -107,12 +107,7 @@ def train_tensorflow_network(config, train_features, test_features, train_labels
     network = model(layers, weights, X, p_keep_input, p_keep_hidden)
 
     # Define cost function
-    cost = None
-    if regressor:
-        # cost = tf.reduce_mean(tf.square(Y - py_x)) #regression
-        pass
-    else:
-        cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=network, labels=Y))
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=network, labels=Y))
 
     # Get optimizer parameters
     optimizer = config.get('optimizer')
@@ -147,7 +142,7 @@ def train_tensorflow_network(config, train_features, test_features, train_labels
                 sess.run(train_op, feed_dict={X: train_features[start:end], Y: train_labels[start:end],
                                               p_keep_input: train_p_input, p_keep_hidden: train_p_hidden})
 
-                print(i, np.mean(np.argmax(test_labels, axis=1) == sess.run(predict_op,
+                print '[i] EPOCH[%s] -- SCORE[%s]' % (i, np.mean(np.argmax(test_labels, axis=1) == sess.run(predict_op,
                                                                             feed_dict={X: test_features,
                                                                                        p_keep_input: test_p_input,
                                                                                        p_keep_hidden: test_p_hidden})))
@@ -215,7 +210,7 @@ def run_toy_trainer(dataset, model_key, train_size, random_seed, regressor, nn_c
         else:
             raise ConfigurationError('[!] Unable to train regressive Tensorflow model at the moment.')
 
-        train_tensorflow_network(nn_config, X_train, X_test, y_train, y_test, regressor=regressor)
+        train_tensorflow_network(nn_config, X_train, X_test, y_train, y_test)
 
     else:
         # Training branch for sklearn models
